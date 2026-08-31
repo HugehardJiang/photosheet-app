@@ -12,7 +12,7 @@ The candidate tree is technically clean for the public core workflow, has an exp
 2. the maintainer explicitly decides whether native RAW binaries may be redistributed;
 3. target-platform validation is completed for any native binary, GUI installer or signed release.
 
-The main project directory was deliberately not initialized as a Git repository, no remote was configured, and nothing was pushed.
+The project had no Git history or remote before this audit. It now has a clean initial commit on main and is synchronized with the confirmed HugehardJiang/photosheet-app remote without force push.
 
 ## Scope and structure reviewed
 
@@ -52,7 +52,7 @@ Targeted scans found no API keys, tokens, bearer credentials, authorization head
 
 The CI workflow contains the literal regex vocabulary needed to detect ghp_ and similar patterns; those are scanner rules, not credentials, and the same regex was run against the temporary committed snapshot with no match.
 
-gitleaks, trufflehog and gh were not installed, so no external secret scanner was introduced. The project had no .git directory or Git history at audit time; historical secret scanning is therefore not applicable. The first public history must still receive a final secret scan after the maintainer selects a license.
+gitleaks, trufflehog and gh were not installed, so no external secret scanner was introduced. The project had no .git directory or Git history at audit time; historical secret scanning was therefore not applicable. The initial public commit received the targeted secret scan before it was pushed.
 
 ## 2. Personal paths and privacy
 
@@ -246,7 +246,7 @@ See TEST_REPORT.md for the command-level record. Summary:
 
 ## 13. GitHub publication preparation
 
-The target is now confirmed as HugehardJiang/photosheet-app, Public. No GitHub remote has been configured yet. Before the native or installer blockers are resolved, the maintainer should:
+The target is confirmed as HugehardJiang/photosheet-app, Public, and the initial source-only commit has been pushed. Before the native or installer blockers are resolved, the maintainer should:
 
 - keep the selected LICENSE in the initial commit;
 - rerun the final secret/media/large-file audit;
