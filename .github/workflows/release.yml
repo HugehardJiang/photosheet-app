@@ -60,7 +60,7 @@ jobs:
           version="$(echo "$GITHUB_REF_NAME" | cut -c2-)"
           go build -trimpath -ldflags "-s -w -X photosheet/internal/project.AppVersion=${version}" -o "release/photosheet-${suffix}${ext}" ./cmd/photosheet
           go build -trimpath -ldflags "-s -w" -o "release/photosheet-updater-${suffix}${ext}" ./cmd/photosheet-updater
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v7
         with:
           name: ${{ matrix.name }}
           path: release/
