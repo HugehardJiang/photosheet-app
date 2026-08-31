@@ -1,0 +1,88 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - "v*.*.*"
+
+permissions:
+  contents: write
+
+jobs:
+  core:
+    name: Build ${{ matrix.name }}
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - name: linux-x64
+            runner: ubuntu-latest
+            goos: linux
+            goarch: amd64
+          - name: linux-arm64
+            runner: ubuntu-latest
+            goos: linux
+            goarch: arm64
+          - name: macos-intel
+            runner: macos-13
+            goos: darwin
+            goarch: amd64
+          - name: macos-arm64
+            runner: macos-14
+            goos: darwin
+            goarch: arm64
+          - name: windows-x64
+            runner: windows-latest
+            goos: windows
+            goarch: amd64
+          - name: windows-arm64
+            runner: windows-latest
+            goos: windows
+            goarch: arm64
+    runs-on: ${{ matrix.runner }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-go@v5
+        with:
+          go-version: "1.22.x"
+          cache: true
+      - name: Build core CLI and updater
+        shell: bash
+        env:
+          GOOS: ${{ matrix.goos }}
+          GOARCH: ${{ matrix.goarch }}
+          CGO_ENABLED: "0"
+        run: |
+          mkdir -p release
+          suffix='${{ matrix.name }}'
+          ext=''
+          if [[ '${{ matrix.goos }}' == 'windows' ]]; then ext='.exe'; fi
+          version="$(echo "$GITHUB_REF_NAME" | cut -c2-)"
+          go build -trimpath -ldflags "-s -w -X photosheet/internal/project.AppVersion=${version}" -o "release/photosheet-${suffix}${ext}" ./cmd/photosheet
+          go build -trimpath -ldflags "-s -w" -o "release/photosheet-updater-${suffix}${ext}" ./cmd/photosheet-updater
+      - uses: actions/upload-artifact@v4
+        with:
+          name: ${{ matrix.name }}
+          path: release/
+
+  publish:
+    name: Publish GitHub release
+    needs: core
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          path: release
+          merge-multiple: true
+      - name: Create checksums
+        working-directory: release
+        run: |
+          find . -type f ! -name SHA256SUMS -print0 | sort -z | xargs -0 sha256sum > SHA256SUMS
+      - name: Publish unsigned core artifacts
+        uses: softprops/action-gh-release@v2
+        with:
+          files: release/**
+          generate_release_notes: true
+          body: |
+            This release contains core CLI and updater artifacts built with the public pure-Go RAW fallback.
+            Native RAW binaries, installers and code signing are not included until their dependency/license review and platform validation are complete.

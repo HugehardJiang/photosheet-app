@@ -1,0 +1,76 @@
+name: Bug report
+description: Report a reproducible PhotoSheet problem
+title: "[Bug]: "
+labels:
+  - bug
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Please remove private photos, RAW files, project files, exact home-directory paths and credentials.
+        Prefer a minimal generated fixture or metadata-only reproduction.
+  - type: input
+    id: version
+    attributes:
+      label: PhotoSheet version
+      placeholder: release tag or commit
+    validations:
+      required: true
+  - type: dropdown
+    id: os
+    attributes:
+      label: Operating system
+      options:
+        - Windows
+        - macOS
+        - Linux
+        - Other
+    validations:
+      required: true
+  - type: input
+    id: input_format
+    attributes:
+      label: Input format
+      placeholder: JPG, PNG, TIFF, DNG, ARW...
+    validations:
+      required: true
+  - type: input
+    id: sheet_format
+    attributes:
+      label: Sheet format
+      placeholder: PNG16, TIFF ZIP, JPEG compatibility...
+    validations:
+      required: true
+  - type: input
+    id: bit_depth
+    attributes:
+      label: Bit depth
+      placeholder: 8-bit or 16-bit
+    validations:
+      required: true
+  - type: input
+    id: raw_backend
+    attributes:
+      label: RAW backend
+      placeholder: fallback, libraw-dngsdk, unavailable, not applicable
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: Reproduction steps
+      placeholder: "1. ... 2. ... 3. ..."
+    validations:
+      required: true
+  - type: textarea
+    id: diagnostics
+    attributes:
+      label: Diagnostics and logs
+      description: Redact private paths and secrets; paste only relevant output.
+      render: text
+    validations:
+      required: true
+  - type: textarea
+    id: dng_details
+    attributes:
+      label: DNG details, if applicable
+      description: Camera, DNG version, compression tag and PhotoSheet diagnostics. Share a RAW sample only after confirming you have permission.
+      placeholder: Camera: ...; DNG version: ...; Compression: ...

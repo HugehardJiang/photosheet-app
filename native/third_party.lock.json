@@ -1,0 +1,153 @@
+{
+  "schemaVersion": 3,
+  "reviewStatus": "blocked-pending-manual-license-review",
+  "policy": "Native artifacts are local-only inputs and are ignored by Git. This manifest is not legal approval.",
+  "targets": {
+    "windows/amd64": {
+      "toolchain": {
+        "msvcPlatformToolset": "v145",
+        "windowsSdk": "10.0.26100.0",
+        "runtime": "MT"
+      },
+      "components": [
+        {
+          "name": "LibRaw",
+          "version": "0.22.2",
+          "sourceArchive": "LibRaw-0.22.2-Win64.zip",
+          "sourceArchiveSha256": "AC64FA12BB00A7581332D4C6AB918C0533FB3F119D6B668D47A6875410DCA948",
+          "buildDefinitions": ["USE_DNGSDK", "qDNGSupportJXL"],
+          "licenseReview": "pending"
+        },
+        {
+          "name": "Adobe Digital Negative SDK",
+          "version": "1.7.1",
+          "build": "2652",
+          "sourceArchiveSha256": "73499B47F4683E12120A234BD0946F02E52AB2FF9834BCBD0E9F8AB4F923360E",
+          "licenseReview": "NEEDS MANUAL LICENSE REVIEW"
+        },
+        {
+          "name": "libjxl",
+          "version": "0.11.2",
+          "source": "bundled by the recorded Adobe DNG SDK build",
+          "dependencies": ["highway", "brotli", "skcms"],
+          "licenseReview": "pending"
+        },
+        {
+          "name": "Adobe XMP Toolkit",
+          "version": "bundled by the recorded Adobe DNG SDK build",
+          "components": ["XMPCore", "XMPFiles"],
+          "licenseReview": "pending"
+        }
+      ],
+      "localArtifact": {
+        "path": "internal/raw/native/windows/libraw.dll",
+        "sha256": "91888AD03BFED7A3590438727CC50D1953F8F2E2FF5204AB1219CAF86ED4473D",
+        "redistribution": "blocked-pending-review"
+      }
+    },
+    "darwin/arm64": {
+      "toolchain": {
+        "deploymentTarget": "11.0",
+        "architecture": "arm64",
+        "runtimeDependencies": "must be system-only"
+      },
+      "components": [
+        {
+          "name": "LibRaw",
+          "version": "0.22.2",
+          "sourceUrl": "https://www.libraw.org/data/LibRaw-0.22.2.zip",
+          "sourceArchiveSha256": "F4448371523F9960D26A131ED9DC21BEE49F967ADBCC4FB6F56B9B47C2BA87C6",
+          "buildDefinitions": ["USE_DNGSDK", "qDNGSupportJXL"],
+          "licenseReview": "pending"
+        },
+        {
+          "name": "Adobe Digital Negative SDK",
+          "version": "1.7.1",
+          "build": "2652",
+          "sourceUrl": "https://helpx.adobe.com/camera-raw/digital-negative.html",
+          "sourceArchiveSha256": "73499B47F4683E12120A234BD0946F02E52AB2FF9834BCBD0E9F8AB4F923360E",
+          "licenseReview": "NEEDS MANUAL LICENSE REVIEW"
+        },
+        {
+          "name": "libjxl",
+          "version": "0.11.2",
+          "source": "bundled by the recorded Adobe DNG SDK build",
+          "dependencies": ["highway", "brotli", "skcms"],
+          "linkage": "static",
+          "licenseReview": "pending"
+        },
+        {
+          "name": "Adobe XMP Toolkit",
+          "version": "bundled by the recorded Adobe DNG SDK build",
+          "components": ["XMPCore"],
+          "linkage": "static",
+          "licenseReview": "pending"
+        },
+        {
+          "name": "libjpeg",
+          "version": "9.3.0",
+          "source": "bundled by the recorded Adobe DNG SDK build",
+          "linkage": "static",
+          "licenseReview": "pending"
+        }
+      ],
+      "localArtifact": {
+        "path": "internal/raw/native/darwin/arm64/libphotosheet_raw.dylib",
+        "sha256": "584DFEEBF79160055C9EE6D5881C37D4A91B36BB5802D4A86D16785B3A605674",
+        "redistribution": "blocked-pending-review"
+      }
+    },
+    "darwin/amd64": {
+      "toolchain": {
+        "deploymentTarget": "11.0",
+        "architecture": "x86_64",
+        "runtimeDependencies": "must be system-only"
+      },
+      "components": [
+        {
+          "name": "LibRaw",
+          "version": "0.22.2",
+          "sourceUrl": "https://www.libraw.org/data/LibRaw-0.22.2.zip",
+          "sourceArchiveSha256": "F4448371523F9960D26A131ED9DC21BEE49F967ADBCC4FB6F56B9B47C2BA87C6",
+          "buildDefinitions": ["USE_DNGSDK", "qDNGSupportJXL"],
+          "licenseReview": "pending"
+        },
+        {
+          "name": "Adobe Digital Negative SDK",
+          "version": "1.7.1",
+          "build": "2652",
+          "sourceUrl": "https://helpx.adobe.com/camera-raw/digital-negative.html",
+          "sourceArchiveSha256": "73499B47F4683E12120A234BD0946F02E52AB2FF9834BCBD0E9F8AB4F923360E",
+          "licenseReview": "NEEDS MANUAL LICENSE REVIEW"
+        },
+        {
+          "name": "libjxl",
+          "version": "0.11.2",
+          "source": "bundled by the recorded Adobe DNG SDK build",
+          "dependencies": ["highway", "brotli", "skcms"],
+          "linkage": "static",
+          "licenseReview": "pending"
+        },
+        {
+          "name": "Adobe XMP Toolkit",
+          "version": "bundled by the recorded Adobe DNG SDK build",
+          "components": ["XMPCore"],
+          "linkage": "static",
+          "licenseReview": "pending"
+        },
+        {
+          "name": "libjpeg",
+          "version": "9.3.0",
+          "source": "bundled by the recorded Adobe DNG SDK build",
+          "linkage": "static",
+          "licenseReview": "pending"
+        }
+      ],
+      "localArtifact": {
+        "path": "internal/raw/native/darwin/amd64/libphotosheet_raw.dylib",
+        "sha256": "874EF743348D07DB0E7BAAA6EEAA340AB0675284097DE5E02D3CA94B192E7C66",
+        "redistribution": "blocked-pending-review"
+      }
+    }
+  }
+}

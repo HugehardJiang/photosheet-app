@@ -1,0 +1,68 @@
+# Go build and test output
+/bin/
+/dist/
+*.exe
+*.test
+*.out
+coverage.out
+coverage.html
+*.coverprofile
+
+# Wails-generated frontend assets and bundles
+/cmd/photosheet-gui/frontend/dist/
+/cmd/photosheet-gui/build/bin/
+
+# Node/Vite output and local installs
+/frontend/node_modules/
+/frontend/dist/
+/frontend/tsconfig.tsbuildinfo
+/frontend/package.json.md5
+/frontend/wailsjs/
+
+# Native RAW artifacts are local-only until the Adobe SDK redistribution review is
+# complete. Keep the paths available for an explicitly configured full build,
+# but never add them accidentally to the public repository.
+/internal/raw/native/windows/libraw.dll
+/internal/raw/native/darwin/**/*.dylib
+/.native-macos/
+/.native/
+
+# IDE and operating-system files
+/.vscode/
+/.idea/
+.DS_Store
+Thumbs.db
+
+# Logs, caches, temporary files, and local application state
+*.log
+/logs/
+/tmp/
+/temp/
+/.cache/
+**/.cache/
+recent-projects/
+local-settings/
+diagnostics/
+
+# Installer and packaging output
+*.dmg
+*.msi
+*.pkg
+*.AppImage
+*.deb
+*.rpm
+*.zip
+
+# Local environment and credentials
+.env
+.env.*
+!.env.example
+config.local.*
+credentials.*
+secrets.*
+*.pem
+*.key
+*.p12
+*.pfx
+*.cer
+*.mobileprovision

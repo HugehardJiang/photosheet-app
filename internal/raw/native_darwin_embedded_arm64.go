@@ -1,0 +1,11 @@
+//go:build darwin && arm64 && cgo && photosheet_native
+
+package raw
+
+import _ "embed"
+
+// The macOS arm64 build script places the verified native artifact here
+// before compiling with -tags photosheet_native.
+//
+//go:embed native/darwin/arm64/libphotosheet_raw.dylib
+var nativeDarwinEmbedded []byte

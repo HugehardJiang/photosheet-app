@@ -1,0 +1,8 @@
+[Desktop Entry]
+Name=PhotoSheet
+Comment=中文照片拼接与拆分工具
+Exec=PhotoSheet
+Icon=photosheet
+Terminal=false
+Type=Application
+Categories=Graphics;Photography;
